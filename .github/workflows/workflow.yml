@@ -24,17 +24,17 @@ jobs:
 
     # Restore dependencies
     - name: Restore Dependencies
-      run: dotnet restore ${{ github.workspace }}
+      run: dotnet restore 
 
     # Build the project
     - name: Build
-      run: dotnet publish ${{ github.workspace }} -c Release -o ./publish
+      run: dotnet publish -c Release -o ./publish
 
     # Deploy to Local Directory
     - name: Deploy Application
       run: |
         $DeployDir = "D:\Publish CICD_Test"
-        $PublishDir = "${{ github.workspace }}\CICD_Test\CICD_Test\publish"
+        $PublishDir = "${{ github.workspace }}\CICD_Test\publish"
 
         # Create deployment directory if it doesn't exist
         if (-Not (Test-Path $DeployDir)) {
