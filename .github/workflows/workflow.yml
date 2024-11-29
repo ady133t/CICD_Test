@@ -24,11 +24,11 @@ jobs:
 
     # Restore dependencies
     - name: Restore Dependencies
-      run: dotnet restore ${{ github.workspace }}\CICD_Test\CICD_Test
+      run: dotnet restore ${{ github.workspace }}
 
     # Build the project
     - name: Build
-      run: dotnet publish ${{ github.workspace }}\CICD_Test\CICD_Test -c Release -o ./publish
+      run: dotnet publish ${{ github.workspace }} -c Release -o ./publish
 
     # Deploy to Local Directory
     - name: Deploy Application
