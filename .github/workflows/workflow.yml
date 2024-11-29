@@ -34,7 +34,7 @@ jobs:
     - name: Deploy Application
       run: |
         $DeployDir = "D:\Publish CICD_Test"
-        $PublishDir = "${{ github.workspace }}\CICD_Test\publish"
+        $PublishDir = "${{ github.workspace }}\publish"
 
         # Create deployment directory if it doesn't exist
         if (-Not (Test-Path $DeployDir)) {
