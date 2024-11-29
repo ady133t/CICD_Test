@@ -1,0 +1,57 @@
+name: Deploy to Self-Hosted Windows Server
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on pushes to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted  # Use self-hosted runner
+    # Optional: Specify a label to target the correct server
+    # runs-on: [self-hosted, windows-server]
+
+    steps:
+    # Checkout the code
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Setup .NET 8 SDK
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x  # Use .NET 8 SDK
+
+    # Restore dependencies
+    - name: Restore Dependencies
+      run: dotnet restore
+
+    # Build the project
+    - name: Build
+      run: dotnet publish -c Release -o ./publish
+
+    # Deploy to Local Directory
+    - name: Deploy Application
+      run: |
+        $DeployDir = "D:\Publish CICD_Test"
+        $PublishDir = "${{ github.workspace }}\publish"
+
+        # Create deployment directory if it doesn't exist
+        if (-Not (Test-Path $DeployDir)) {
+          New-Item -ItemType Directory -Path $DeployDir -Force
+        }
+
+        # Clear the deployment directory
+        Remove-Item -Path "$DeployDir\*" -Recurse -Force
+
+        # Copy the published files to the deployment directory
+        Copy-Item -Path "$PublishDir\*" -Destination $DeployDir -Recurse
+
+        # Optionally restart the application
+        $AppProcess = "CICD_Test.exe" # Replace with your app's process name
+        $Running = Get-Process -Name $AppProcess -ErrorAction SilentlyContinue
+        if ($Running) {
+          Stop-Process -Name $AppProcess -Force
+        }
+        Start-Process -FilePath "$DeployDir\CICD_Test.exe" -NoNewWindow
+      shell: pwsh
