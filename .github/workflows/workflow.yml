@@ -54,4 +54,4 @@ jobs:
           Stop-Process -Name $AppProcess -Force
         }
         Start-Process -FilePath "$DeployDir\CICD_Test.exe" -NoNewWindow
-      shell: pwsh
+      shell: cmd
