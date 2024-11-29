@@ -55,5 +55,5 @@ jobs:
         if ($Running) {
           Stop-Process -Name $AppProcess -Force
         }
-        Start-Process -FilePath "$DeployDir\CICD_Test.exe" # -NoNewWindow
-      shell: powershell
+        Start-Process -FilePath "$DeployDir\CICD_Test.exe" #-NoNewWindow
+      shell: cmd
