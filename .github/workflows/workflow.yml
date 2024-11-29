@@ -61,7 +61,7 @@ jobs:
         #Start-Process cmd.exe -ArgumentList "/c `"$DeployDir\CICD_Test.exe`""
         shell: powershell
 
-     - name: Run App in CMD
-       run: |
-          "D:\CICD_Test runner\actions-runner\_work\CICD_Test\CICD_Test\publish\CICD_Test.exe"
+    - name: Run App in CMD
+      run: |
+        "D:\CICD_Test runner\actions-runner\_work\CICD_Test\CICD_Test\publish\CICD_Test.exe"
       shell: cmd
