@@ -64,4 +64,4 @@ jobs:
     - name: Run App in CMD
       run: |
         "D:\CICD_Test runner\actions-runner\_work\CICD_Test\CICD_Test\publish\CICD_Test.exe"
-      shell: cmd
+        shell: cmd
