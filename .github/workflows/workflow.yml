@@ -58,5 +58,6 @@ jobs:
         shell: powershell
 
     - name: Run the Application in CMD
+      run: |
         Start-Process -FilePath "$DeployDir\CICD_Test.exe" #-NoNewWindow
       shell: cmd
